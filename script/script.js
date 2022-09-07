@@ -35,6 +35,7 @@ const resetEl = document.querySelector('#reset');
 
 /*----- event listeners -----*/
 
+resetEl.addEventListener('click', init);
 // submitEl.addEventListener('click', submit);
 
 /*----- functions -----*/
@@ -53,6 +54,13 @@ const resetEl = document.querySelector('#reset');
 //     return score + SCORE_BASE;
 // }
 
-// function init() {
-//     (display question[0] & set currentAnswer[0])
-// };
+function init() {
+    correctCount = 0;
+	incorrectCount = 0;
+    idx = 0; 
+    currentQuestion = QUESTIONS[idx];
+    currentAnswer = ANSWERS[idx];
+    questionNumberEl.innerHTML = `Question# ${idx +1}:`
+    questionEl.innerHTML = `${currentQuestion}`;
+};
+init();
