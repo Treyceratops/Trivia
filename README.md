@@ -54,7 +54,16 @@ https://www.figma.com/file/KSsQ5Ak5pftMoZCfS8ufL1/Untitled?node-id=0%3A1
 
 ## Pseudo-code
 
-- 
+- create div for rules, score, last answer, & correctness, input/input button, question, reset button
+- define questions/answers, correct/incorrect count, current idx, score, win/lose count
+- cache divs by id
+- display question and link corresponding answer
+- add event listener to button to check input's value to see if (input.value === answer), adjusts correct/incorrect answers, brings up next question (QUESTIONS[idx++]), next answer (ANSWERS[idx++])
+- input.value methods on event listener (.toLowerCase, .trim)
+- display updated scores
+- display previous questions info
+- set win/lose conditions if (score >= winCondition#) then display win, else if (score >= loseCondition#) then display loss 
+- resetGame by calling init()
 
 ## Unsolved problems or Major Hurdles
 
