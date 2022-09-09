@@ -1,30 +1,28 @@
 /*----- constants -----*/
 
 const QUESTIONS = [
-	'What color is the sky?',
-	'What color is blue-grass?',
-	'What color is the ocean?',
-	'What color are blueberries?',
-	'What color is a blue whale?',
-	'What color is a smurf?',
-	'What color is Neptune?',
-	'What color is a blue t-shirt?',
-	"What color are robins' eggs?",
-	'What color is a sapphire',
-	'What color is the color blue?',
+	'What is the modulus operator?',
+	'What is the bang operator?',
+	'True or False? This arrow function is valid JS: let myFunction = (a, b) => a * b;',
+	'True or False? This string interpolation example is valid JS: $`This is the worst {trivia} ever!`',
+	'True or False? 0 evaluates to false.',
+	'There are 7 primitive data types: String, Number, BigInt, Undefined, Symbol, Null, and ...?',
+	'Javascript is considered OOP, which stands for...?',
+	'What HTML <tag> do we put JavaScript into?',
+	"This method would select all <p>. Fill in the blank: document._blank_All('p')",
+	'This function takes a string and returns it as an integer. Fill in the blank: _blank_()',
 ];
 const ANSWERS = [
-	'blue',
-	'blue',
-	'blue',
-	'blue',
-	'blue',
-	'blue',
-	'blue',
-	'blue',
-	'blue',
-	'blue',
-	'blue',
+	'%',
+	'!',
+	'true',
+	'false',
+	'true',
+	'boolean',
+	'object oriented programming',
+	'<script>',
+	'queryselector',
+	'parseint',
 ];
 const SCORE_BASE = 1;
 
@@ -48,7 +46,8 @@ const inpEl = document.querySelector('#input');
 const submitEl = document.querySelector('#submit');
 const correctScoreDisplayEl = document.querySelector('#correct-score');
 const incorrectScoreDisplayEl = document.querySelector('#incorrect-score');
-const previousResultsEl = document.querySelector('#previous-results');
+const previousQuestionResultsEl = document.querySelector('#previous-question-results');
+const previousAnswerResultsEl = document.querySelector('#previous-answer-results');
 const resetEl = document.querySelector('#reset');
 
 /*----- event listeners -----*/
@@ -82,7 +81,8 @@ function submit(event) {
 };
 
 function displayPreviousScores() {
-    previousResultsEl.innerHTML = `The previous answer was "${ANSWERS[idx - 1]}" and... you got it ${rightOrWrong}`
+    previousQuestionResultsEl.innerHTML = `The previous question was "${QUESTIONS[idx - 1]}".`;
+    previousAnswerResultsEl.innerHTML = `The answer was "${ANSWERS[idx - 1]}" and... you got it ${rightOrWrong}`;
 };
 
 function winGame() {
