@@ -8,8 +8,8 @@ const QUESTIONS = [
 	'True or False? 0 evaluates to false.',
 	'There are 7 primitive data types: String, Number, BigInt, Undefined, Symbol, Null, and ...?',
 	'Javascript is considered OOP, which stands for...?',
-	'What HTML <tag> do we put JavaScript into?',
-	"This method would select all <p>. Fill in the blank: document._blank_All('p')",
+	'What HTML <tag> do we put JavaScript into? Fill in the blank: <_blank_>',
+	"This method would get all <p> from the DOM. Fill in the blank: document._blank_All('p')",
 	'This function takes a string and returns it as an integer. Fill in the blank: _blank_()',
 ];
 const ANSWERS = [
@@ -20,7 +20,7 @@ const ANSWERS = [
 	'true',
 	'boolean',
 	'object oriented programming',
-	'<script>',
+	'script',
 	'queryselector',
 	'parseint',
 ];
@@ -71,33 +71,38 @@ function submit(event) {
 		incorrectScoreDisplayEl.innerText = `Incorrect Score: ${incorrectCount}`;
         rightOrWrong = 'wrong! 😭';
 	}
-    inpEl.value = '';
 	idx++;
+    currentQuestion = QUESTIONS[idx];
+    currentAnswer = ANSWERS[idx];
 	questionNumberEl.innerHTML = `Question# ${idx + 1}:`;
-	questionEl.innerText = QUESTIONS[idx];
+	questionEl.innerText = currentQuestion;
     displayPreviousScores();
+    inpEl.value = '';
+    inpEl.focus();
     winGame();
     loseGame();
 };
 
 function displayPreviousScores() {
     previousQuestionResultsEl.innerHTML = `The previous question was "${QUESTIONS[idx - 1]}".`;
-    previousAnswerResultsEl.innerHTML = `The answer was "${ANSWERS[idx - 1]}" and... you got it ${rightOrWrong}`;
+    previousAnswerResultsEl.innerHTML = `The answer was "${ANSWERS[idx - 1]}". You guessed "${inpEl.value}" and... you got it ${rightOrWrong}`;
 };
 
 function winGame() {
-	if (correctCount >= 7) {
+	if (correctCount >= winningCorrectCount) {
 		questionNumberEl.innerHTML = ``;
 		questionEl.innerHTML = `You're a genius! 🧠 You win!`;
-		return;
+		submitEl.removeEventListener('click', submit);
+        return;
 	}
 };
 
 function loseGame() {
-	if (incorrectCount >= 4) {
+	if (incorrectCount >= losingIncorrectCount) {
 		questionNumberEl.innerHTML = ``;
 		questionEl.innerHTML = `Not this time suckaaa! 😡 You lose. Try again?`;
-		return;
+		submitEl.removeEventListener('click', submit);
+        return;
 	}
 };
 
@@ -116,5 +121,7 @@ function init() {
 	questionEl.innerHTML = `${currentQuestion}`;
 	correctScoreDisplayEl.innerText = `Correct Score: ${correctCount}`;
 	incorrectScoreDisplayEl.innerText = `Incorrect Score: ${incorrectCount}`;
+    previousQuestionResultsEl.innerHTML = '';
+	previousAnswerResultsEl.innerHTML = '';
 };
 init();

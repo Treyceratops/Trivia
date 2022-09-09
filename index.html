@@ -8,18 +8,21 @@
     <link rel="stylesheet" href="style/reset.css">
     <link rel="stylesheet" href="style/style.css">
     <script defer src="script/script.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,600&display=swap" rel="stylesheet">
 </head>
 <body>
     <h1 id="title">JavaScript Trivia</h1>
     
-    <h2 id="rules">Rules: Get 7/10 questions correct to win. <br> Get more than 3 wrong to lose. <br> Good luck!</h2>
+    <h2 id="rules"><span id="rule">Rules:</span> Get 7/10 questions correct to win. <br> Get more than 3 wrong to lose. <br> Good luck!</h2>
     
     <div id="question-no"></div>
     
     <div id="question"></div>
     
     <form action="" id="form">
-        <input type="text" id="input"></input>
+        <input autofocus autocomplete="off" type="text" id="input"></input>
         <button id="submit">Submit</button>
     </form>
 
