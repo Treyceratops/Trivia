@@ -38,6 +38,7 @@ let currentQuestion = '';
 let currentAnswer = '';
 let winningCorrectCount = 7;
 let losingIncorrectCount = 4;
+let rightOrWrong = '';
 
 /*----- cached element references -----*/
 
@@ -45,7 +46,6 @@ const questionNumberEl = document.querySelector('#question-no');
 const questionEl = document.querySelector('#question');
 const inpEl = document.querySelector('#input');
 const submitEl = document.querySelector('#submit');
-// might need to cache form instead of button?
 const correctScoreDisplayEl = document.querySelector('#correct-score');
 const incorrectScoreDisplayEl = document.querySelector('#incorrect-score');
 const previousResultsEl = document.querySelector('#previous-results');
@@ -60,36 +60,46 @@ resetEl.addEventListener('click', init);
 
 function submit(event) {
 	event.preventDefault();
-	if (inpEl.value === currentAnswer) {
+    if (inpEl.value === '') {
+        return;
+    } else if (inpEl.value.toLowerCase().trim() === currentAnswer) {
 		correctCount = correctCount + SCORE_BASE;
 		score = score + SCORE_BASE;
 		correctScoreDisplayEl.innerText = `Correct Score: ${correctCount}`;
+        rightOrWrong = 'right!  😍';
 	} else {
 		incorrectCount = incorrectCount + SCORE_BASE;
 		incorrectScoreDisplayEl.innerText = `Incorrect Score: ${incorrectCount}`;
+        rightOrWrong = 'wrong! 😭';
 	}
+    inpEl.value = '';
 	idx++;
 	questionNumberEl.innerHTML = `Question# ${idx + 1}:`;
 	questionEl.innerText = QUESTIONS[idx];
+    displayPreviousScores();
     winGame();
     loseGame();
-}
+};
+
+function displayPreviousScores() {
+    previousResultsEl.innerHTML = `The previous answer was "${ANSWERS[idx - 1]}" and... you got it ${rightOrWrong}`
+};
 
 function winGame() {
 	if (correctCount >= 7) {
 		questionNumberEl.innerHTML = ``;
-		questionEl.innerHTML = `You're a genius! You win!`;
+		questionEl.innerHTML = `You're a genius! 🧠 You win!`;
 		return;
 	}
-}
+};
 
 function loseGame() {
 	if (incorrectCount >= 4) {
 		questionNumberEl.innerHTML = ``;
-		questionEl.innerHTML = `Not this time suckaaa! You lose. Try again?`;
+		questionEl.innerHTML = `Not this time suckaaa! 😡 You lose. Try again?`;
 		return;
 	}
-}
+};
 
 // function incrementScore(score) {
 //     return score + SCORE_BASE;
@@ -106,5 +116,5 @@ function init() {
 	questionEl.innerHTML = `${currentQuestion}`;
 	correctScoreDisplayEl.innerText = `Correct Score: ${correctCount}`;
 	incorrectScoreDisplayEl.innerText = `Incorrect Score: ${incorrectCount}`;
-}
+};
 init();
