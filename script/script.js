@@ -93,7 +93,8 @@ function winGame() {
 		questionNumberEl.innerHTML = ``;
 		questionEl.innerHTML = `You're a genius! 🧠 You win!`;
 		submitEl.removeEventListener('click', submit);
-        return;
+        inpEl.style.display = 'none';
+		submitEl.style.display = 'none';
 	}
 };
 
@@ -101,8 +102,11 @@ function loseGame() {
 	if (incorrectCount >= losingIncorrectCount) {
 		questionNumberEl.innerHTML = ``;
 		questionEl.innerHTML = `Not this time suckaaa! 😡 You lose. Try again?`;
-		submitEl.removeEventListener('click', submit);
-        return;
+		// submitEl.removeEventListener('click', submit);
+        // return;
+        // inpEl.remove();
+        inpEl.style.display = 'none';
+        submitEl.style.display = 'none';
 	}
 };
 
@@ -123,5 +127,7 @@ function init() {
 	incorrectScoreDisplayEl.innerText = `Incorrect Score: ${incorrectCount}`;
     previousQuestionResultsEl.innerHTML = '';
 	previousAnswerResultsEl.innerHTML = '';
+    inpEl.style.display = 'block';
+    submitEl.style.display = 'block';
 };
 init();

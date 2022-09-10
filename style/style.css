@@ -3,7 +3,8 @@ body {
     background-image: url("/js.png");
     background-repeat: no-repeat;
     background-position: right;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Josefin Sans', sans-serif;
+    color: black;
 }
 
 #title {
