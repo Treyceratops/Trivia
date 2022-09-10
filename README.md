@@ -47,9 +47,9 @@ https://www.figma.com/file/KSsQ5Ak5pftMoZCfS8ufL1/Untitled?node-id=0%3A1
 ## Stretch Goals
 
 - Add time-based scoring or speed Round?
-- Design
-- Animation
-- Ask question randomly and make it unrepeatable
+<!-- - Design -->
+<!-- - Animation -->
+<!-- - Ask question randomly and make it unrepeatable -->
 
 
 ## Pseudo-code

@@ -37,6 +37,9 @@ let currentAnswer = '';
 let winningCorrectCount = 7;
 let losingIncorrectCount = 4;
 let rightOrWrong = '';
+let haveIt = [];
+let questionNumIdx = 0;
+let previousIdx = 0;
 
 /*----- cached element references -----*/
 
@@ -55,26 +58,6 @@ const resetEl = document.querySelector('#reset');
 submitEl.addEventListener('click', submit);
 resetEl.addEventListener('click', init);
 
-/*----- animation -----*/
-
-const animateCSS = (element, animation, prefix = 'animate__') =>
-  // We create a Promise and return it
-  new Promise((resolve, reject) => {
-    const animationName = `${prefix}${animation}`;
-    const node = document.querySelector(element);
-
-    node.classList.add(`${prefix}animated`, animationName);
-
-    // When the animation ends, we clean the classes and resolve the Promise
-    function handleAnimationEnd(event) {
-      event.stopPropagation();
-      node.classList.remove(`${prefix}animated`, animationName);
-      resolve('Animation ended');
-    }
-
-    node.addEventListener('animationend', handleAnimationEnd, {once: true});
-  });
-
 /*----- functions -----*/
 
 function submit(event) {
@@ -91,10 +74,11 @@ function submit(event) {
 		incorrectScoreDisplayEl.innerText = `Fail Score: ${incorrectCount}/4`;
         rightOrWrong = 'wrong! 😭';
 	}
-	idx++;
+    previousIdx = idx;
+	idx = generateUniqueRandom(10);
     currentQuestion = QUESTIONS[idx];
     currentAnswer = ANSWERS[idx];
-	questionNumberEl.innerHTML = `Question# ${idx + 1}:`;
+	questionNumberEl.innerHTML = `Question# ${questionNumIdx + 1}:`;
 	questionEl.innerText = currentQuestion;
     displayPreviousScores();
     inpEl.value = '';
@@ -104,8 +88,8 @@ function submit(event) {
 };
 
 function displayPreviousScores() {
-    previousQuestionResultsEl.innerHTML = `The previous question was "${QUESTIONS[idx - 1]}".`;
-    previousAnswerResultsEl.innerHTML = `The answer was "${ANSWERS[idx - 1]}". You guessed "${inpEl.value}" and... you got it ${rightOrWrong}`;
+    previousQuestionResultsEl.innerHTML = `The previous question was "${QUESTIONS[previousIdx]}".`;
+    previousAnswerResultsEl.innerHTML = `The answer was "${ANSWERS[previousIdx]}". You guessed "${inpEl.value}" and... you got it ${rightOrWrong}`;
 };
 
 function winGame() {
@@ -122,9 +106,6 @@ function loseGame() {
 	if (incorrectCount >= losingIncorrectCount) {
 		questionNumberEl.innerHTML = ``;
 		questionEl.innerHTML = `😡 You failed. Try again?`;
-		// submitEl.removeEventListener('click', submit);
-        // return;
-        // inpEl.remove();
         inpEl.style.display = 'none';
         submitEl.style.display = 'none';
 	}
@@ -134,14 +115,36 @@ function loseGame() {
 //     return score + SCORE_BASE;
 // }
 
+function generateUniqueRandom(maxNr) {
+	//Generate random number
+	let random = (Math.random() * maxNr).toFixed();
+
+	//Coerce to number by boxing
+	random = Number(random);
+
+	if (!haveIt.includes(random)) {
+		haveIt.push(random);
+		return random;
+	} else {
+		if (haveIt.length < maxNr) {
+			//Recursively generate number
+			return generateUniqueRandom(maxNr);
+		} else {
+			console.log('No more numbers available.');
+			return false;
+		}
+	}
+}
 function init() {
 	correctCount = 0;
 	incorrectCount = 0;
-	idx = 0;
+	idx = generateUniqueRandom(9);
 	score = 0;
 	currentQuestion = QUESTIONS[idx];
 	currentAnswer = ANSWERS[idx];
-	questionNumberEl.innerHTML = `Question# ${idx + 1}:`;
+    haveIt = [];
+
+	questionNumberEl.innerHTML = `Question# ${questionNumIdx = 0 + 1}:`;
 	questionEl.innerHTML = `${currentQuestion}`;
 	correctScoreDisplayEl.innerText = `Pass Score: ${correctCount}`;
 	incorrectScoreDisplayEl.innerText = `Fail Score: ${incorrectCount}`;

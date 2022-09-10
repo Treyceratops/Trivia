@@ -6,7 +6,7 @@ body {
     font-family: 'Josefin Sans', sans-serif;
     color: black;
     animation: fadeIn;
-    animation-duration: 4s;
+    animation-duration: 5s;
 }
 
 #title {
