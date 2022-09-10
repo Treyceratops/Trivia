@@ -2,19 +2,22 @@ body {
     background-color: rgb(247, 223, 30);
     background-image: url("/js.png");
     background-repeat: no-repeat;
-    background-position: right;
+    background-position: right bottom;
     font-family: 'Josefin Sans', sans-serif;
     color: black;
+    animation: fadeIn;
+    animation-duration: 4s;
 }
 
 #title {
-    font-size: 50px;
+    font-size: 100px;
     text-align: center;
     font-weight: bold;
+    margin-top: 10px;
 }
 
 #rule {
-    font-size: 25px;
+    font-size: 40px;
     font-weight: bold;
 }
 
@@ -30,18 +33,25 @@ body {
 #question {
     text-align: center;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 1.5rem;
     margin-bottom: 30px;
 }
 
+#question:hover {
+    transform: scale(1.2);
+}
+
 #input{
+    border: 2px solid white;
     display: block;
     margin: auto;
-    background-color: lightgrey;
+    background-color: black;
+    color: rgb(75, 198, 238);
+    font-size: 20px;
 }
 
 #submit {
-    background-color: green;
+    background-color: rgb(33, 106, 33);
     color: white;
     border: 2px solid black;
     display: block;
@@ -51,15 +61,15 @@ body {
 
 #correct-score {
     margin-top: 40px;
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
-    color: green;
+    color: rgb(33, 106, 33);
 }
 
 #incorrect-score {
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
-    color: red;
+    color: rgb(147, 1, 147);
 }
 
 #previous-question-results {
@@ -72,7 +82,7 @@ margin-top: 80px;
 
 #reset {
     margin-top: 80px;
-    background-color: red;
+    background-color: rgb(147, 1, 147);
     color: white;
     border: 2px dotted black;
 }

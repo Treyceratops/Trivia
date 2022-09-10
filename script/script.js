@@ -55,6 +55,26 @@ const resetEl = document.querySelector('#reset');
 submitEl.addEventListener('click', submit);
 resetEl.addEventListener('click', init);
 
+/*----- animation -----*/
+
+const animateCSS = (element, animation, prefix = 'animate__') =>
+  // We create a Promise and return it
+  new Promise((resolve, reject) => {
+    const animationName = `${prefix}${animation}`;
+    const node = document.querySelector(element);
+
+    node.classList.add(`${prefix}animated`, animationName);
+
+    // When the animation ends, we clean the classes and resolve the Promise
+    function handleAnimationEnd(event) {
+      event.stopPropagation();
+      node.classList.remove(`${prefix}animated`, animationName);
+      resolve('Animation ended');
+    }
+
+    node.addEventListener('animationend', handleAnimationEnd, {once: true});
+  });
+
 /*----- functions -----*/
 
 function submit(event) {
@@ -64,11 +84,11 @@ function submit(event) {
     } else if (inpEl.value.toLowerCase().trim() === currentAnswer) {
 		correctCount = correctCount + SCORE_BASE;
 		score = score + SCORE_BASE;
-		correctScoreDisplayEl.innerText = `Correct Score: ${correctCount}`;
+		correctScoreDisplayEl.innerText = `Pass Score: ${correctCount}/7`;
         rightOrWrong = 'right!  😍';
 	} else {
 		incorrectCount = incorrectCount + SCORE_BASE;
-		incorrectScoreDisplayEl.innerText = `Incorrect Score: ${incorrectCount}`;
+		incorrectScoreDisplayEl.innerText = `Fail Score: ${incorrectCount}/4`;
         rightOrWrong = 'wrong! 😭';
 	}
 	idx++;
@@ -91,7 +111,7 @@ function displayPreviousScores() {
 function winGame() {
 	if (correctCount >= winningCorrectCount) {
 		questionNumberEl.innerHTML = ``;
-		questionEl.innerHTML = `You're a genius! 🧠 You win!`;
+		questionEl.innerHTML = `Pure genius! 🧠 You passed!`;
 		submitEl.removeEventListener('click', submit);
         inpEl.style.display = 'none';
 		submitEl.style.display = 'none';
@@ -101,7 +121,7 @@ function winGame() {
 function loseGame() {
 	if (incorrectCount >= losingIncorrectCount) {
 		questionNumberEl.innerHTML = ``;
-		questionEl.innerHTML = `Not this time suckaaa! 😡 You lose. Try again?`;
+		questionEl.innerHTML = `😡 You failed. Try again?`;
 		// submitEl.removeEventListener('click', submit);
         // return;
         // inpEl.remove();
@@ -123,8 +143,8 @@ function init() {
 	currentAnswer = ANSWERS[idx];
 	questionNumberEl.innerHTML = `Question# ${idx + 1}:`;
 	questionEl.innerHTML = `${currentQuestion}`;
-	correctScoreDisplayEl.innerText = `Correct Score: ${correctCount}`;
-	incorrectScoreDisplayEl.innerText = `Incorrect Score: ${incorrectCount}`;
+	correctScoreDisplayEl.innerText = `Pass Score: ${correctCount}`;
+	incorrectScoreDisplayEl.innerText = `Fail Score: ${incorrectCount}`;
     previousQuestionResultsEl.innerHTML = '';
 	previousAnswerResultsEl.innerHTML = '';
     inpEl.style.display = 'block';
