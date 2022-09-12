@@ -51,6 +51,7 @@ const correctScoreDisplayEl = document.querySelector('#correct-score');
 const incorrectScoreDisplayEl = document.querySelector('#incorrect-score');
 const previousQuestionResultsEl = document.querySelector('#previous-question-results');
 const previousAnswerResultsEl = document.querySelector('#previous-answer-results');
+const previousResultsEl = document.querySelector('#previous-results');
 const resetEl = document.querySelector('#reset');
 
 /*----- event listeners -----*/
@@ -68,14 +69,14 @@ function submit(event) {
 		correctCount = correctCount + SCORE_BASE;
 		score = score + SCORE_BASE;
 		correctScoreDisplayEl.innerText = `Pass Score: ${correctCount}/7`;
-        rightOrWrong = 'right!  😍';
+        rightOrWrong = 'correct. 😍';
 	} else {
 		incorrectCount = incorrectCount + SCORE_BASE;
 		incorrectScoreDisplayEl.innerText = `Fail Score: ${incorrectCount}/4`;
-        rightOrWrong = 'wrong! 😭';
+        rightOrWrong = 'incorrect. 😭';
 	}
     previousIdx = idx;
-	idx = generateUniqueRandom(10);
+	idx = generateUniqueRandom(9);
     currentQuestion = QUESTIONS[idx];
     currentAnswer = ANSWERS[idx];
 	questionNumberEl.innerHTML = `Question# ${questionNumIdx + 1}:`;
@@ -88,18 +89,26 @@ function submit(event) {
 };
 
 function displayPreviousScores() {
-    previousQuestionResultsEl.innerHTML = `The previous question was "${QUESTIONS[previousIdx]}".`;
-    previousAnswerResultsEl.innerHTML = `The answer was "${ANSWERS[previousIdx]}". You guessed "${inpEl.value}" and... you got it ${rightOrWrong}`;
+    previousQuestionResultsEl.innerHTML = `Previous Question: "${QUESTIONS[previousIdx]}".`;
+    previousAnswerResultsEl.innerHTML = `Previous Answer: "${ANSWERS[previousIdx]}"`;
+    previousResultsEl.innerHTML =
+			`Previous Results: You guessed "${inpEl.value}" and were ${rightOrWrong}`;
 };
 
 function winGame() {
-	if (correctCount >= winningCorrectCount) {
-		questionNumberEl.innerHTML = ``;
-		questionEl.innerHTML = `Pure genius! 🧠 You passed!`;
-		submitEl.removeEventListener('click', submit);
-        inpEl.style.display = 'none';
-		submitEl.style.display = 'none';
-	}
+    if (correctCount >= winningCorrectCount && incorrectCount === 0) {
+			questionNumberEl.innerHTML = ``;
+			questionEl.innerHTML = `Perfect score! 💯 You passed!`;
+			submitEl.removeEventListener('click', submit);
+			inpEl.style.display = 'none';
+			submitEl.style.display = 'none';
+		} else if (correctCount >= winningCorrectCount) {
+			questionNumberEl.innerHTML = ``;
+			questionEl.innerHTML = `Pure genius! 🧠 You passed!`;
+			submitEl.removeEventListener('click', submit);
+			inpEl.style.display = 'none';
+			submitEl.style.display = 'none';
+		}
 };
 
 function loseGame() {
@@ -111,30 +120,21 @@ function loseGame() {
 	}
 };
 
-// function incrementScore(score) {
-//     return score + SCORE_BASE;
-// }
-
 function generateUniqueRandom(maxNr) {
-	//Generate random number
 	let random = (Math.random() * maxNr).toFixed();
-
-	//Coerce to number by boxing
 	random = Number(random);
-
-	if (!haveIt.includes(random)) {
+    if (!haveIt.includes(random)) {
 		haveIt.push(random);
 		return random;
 	} else {
 		if (haveIt.length < maxNr) {
-			//Recursively generate number
 			return generateUniqueRandom(maxNr);
 		} else {
-			console.log('No more numbers available.');
 			return false;
 		}
 	}
-}
+};
+
 function init() {
 	correctCount = 0;
 	incorrectCount = 0;
@@ -148,8 +148,9 @@ function init() {
 	questionEl.innerHTML = `${currentQuestion}`;
 	correctScoreDisplayEl.innerText = `Pass Score: ${correctCount}`;
 	incorrectScoreDisplayEl.innerText = `Fail Score: ${incorrectCount}`;
-    previousQuestionResultsEl.innerHTML = '';
+    previousQuestionResultsEl.innerHTML = 'Previous Results:';
 	previousAnswerResultsEl.innerHTML = '';
+    previousResultsEl.innerHTML = '';
     inpEl.style.display = 'block';
     submitEl.style.display = 'block';
 };

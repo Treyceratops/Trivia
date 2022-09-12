@@ -8,7 +8,7 @@
 
 ## Embedded Screenshot of the App
 
-- 
+![](../../../Desktop/Screen%20Shot%202022-09-12%20at%2007.39.38.png)
 
 ## Wire Frame
 
@@ -19,10 +19,7 @@ https://www.figma.com/file/KSsQ5Ak5pftMoZCfS8ufL1/Untitled?node-id=0%3A1
 - HTML
 - CSS
 - JavaScript
-
-## Installation instructions
-
-- 
+- Animate.css Library
 
 ## User Stories
 
@@ -46,28 +43,30 @@ https://www.figma.com/file/KSsQ5Ak5pftMoZCfS8ufL1/Untitled?node-id=0%3A1
 
 ## Stretch Goals
 
+- Design
+- Animation
+- Ask question randomly and make it unrepeatable
+- add containers around elements
 - Add time-based scoring or speed Round?
-<!-- - Design -->
-<!-- - Animation -->
-<!-- - Ask question randomly and make it unrepeatable -->
 
 
 ## Pseudo-code
 
-<!-- - create div for rules, score, last answer, & correctness, input/input button, question, & reset button with classes -->
-<!-- - define rules -->
-<!-- - define questions/answers, correct/incorrect count, current idx, score, win/lose count -->
-<!-- - cache divs by id -->
-<!-- - display question and link corresponding answer -->
-<!-- - add event listener to button to check input's value to see if (input.value === answer), adjusts correct/incorrect answers, brings up next question (QUESTIONS[idx++]), next answer (ANSWERS[idx++]) -->
-<!-- - delete input's value after clicking submit -->
-<!-- - input.value methods on event listener (.toLowerCase, .trim) -->
+- create div for rules, score, last answer, & correctness, input/input button, question, & reset button with classes
+- define rules
+- define questions/answers, correct/incorrect count, current idx, score, win/lose count
+- cache divs by id
+- display question and link corresponding answer
+- add event listener to button to check input's value to see if (input.value === answer), adjusts correct/incorrect answers, brings up next question (QUESTIONS[idx++]), next answer (ANSWERS[idx++])
+- delete input's value after clicking submit
+- input.value methods on event listener (.toLowerCase, .trim)
 - display updated scores
-<!-- - display previous questions info -->
-<!-- - set win/lose conditions if (score >= winCondition#) then display win, else if (score >= loseCondition#) then display loss  -->
-<!-- - resetGame by calling init() -->
-<!-- - stop functioning after 10 questions or win/loss -->
+- display previous questions info
+- set win/lose conditions if (score >= winCondition#) then display win, else if (score >= loseCondition#) then display loss 
+- resetGame by calling init()
+- stop functioning after 10 questions or win/loss
 
 ## Unsolved problems or Major Hurdles
 
-- 
+- Did not know the usage of (event.preventDefault()) and was resetting the (input.value) without my understanding before it was in place
+- Did not know the usage of (element.style.display = 'block'/'none') 

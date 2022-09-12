@@ -17,26 +17,34 @@
   />
 </head>
 <body>
-    <h1 id="title">JavaScript Quiz</h1>
+    <h1 id="title">Java - Script Quiz</h1>
     
-    <h2 id="rules"><span id="rule">Conditions:</span> Get 7/10 correct answers to pass. <br> Get more than 3 incorrect to fail. <br> Good luck!</h2>
+    <h2 id="rules" class="fade"><span id="rule">Conditions:</span> Get 7/10 correct answers to pass. <br> Get more than 3 incorrect to fail. <br> Good luck!</h2>
     
     <div id="question-no"></div>
     
-    <div id="question"></div>
+    <div id="question" class="fade"></div>
     
     <form action="" id="form">
         <input autofocus autocomplete="off" type="text" id="input"></input>
-        <button id="submit">Submit</button>
+        <button id="submit" class="fade">Submit</button>
     </form>
 
-    <div id="correct-score"></div>
+    <div class="borders previous-score fade">
+        <div id="correct-score"></div>
 
-    <div id="incorrect-score"></div>
+        <div id="incorrect-score"></div>
+    </div>
 
-    <div id="previous-question-results"></div>
+    <div class="borders previous-results fade">
+        <div id="previous-question-results"></div>
 
-    <div id="previous-answer-results"></div>
+        <div id="previous-answer-results"></div>
+
+        <div 
+        id="previous-results">
+        </div>
+    </div>
 
     <button id="reset">Reset-Game</button>
 </body>
