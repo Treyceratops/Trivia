@@ -8,7 +8,7 @@
 
 ## Embedded Screenshot of the App
 
-![](Screen Shot 2022-09-12 at 07.39.38.png)
+![](./appshot.png)
 
 ## Wire Frame
 
